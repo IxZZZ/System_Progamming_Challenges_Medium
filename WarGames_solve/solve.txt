@@ -1,0 +1,12 @@
+rand1: 0x13329ea0 3
+rand2: 
+rand3: 0x50c0a14c 5
+rand4: 0x208cb496 3
+rand5: 0x13daf7c1 3
+rand6: 0x2f85953b 
+rand7: 0x70b47f9a
+rand8:
+rand9: 
+
+dont\ play
+

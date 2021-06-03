@@ -1,0 +1,5 @@
+0060FEB4 0x7b (123) input stack
+
+60FEBA ebp+var_E
+
+0060FEAC  00`7B`5038  debug038:007B5038
