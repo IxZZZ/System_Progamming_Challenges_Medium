@@ -88,7 +88,7 @@ Phân tích hàm này ta thấy chương trình sẽ lấy từng ký tự của
  Vậy kết quả sẽ phụ thuộc vào thời gian hiện tại
  
  Python script
- ```
+ ```python
  import time
 
 current_time = time.localtime(time.time())
