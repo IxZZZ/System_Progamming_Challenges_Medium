@@ -63,12 +63,53 @@ Sau đó chuỗi được truyền vào hàm `compare` để tạo ra một chu�
 
 Cuối cùng sẽ so sánh input nhập vào với chuỗi được lưu trong `v6` nếu bằng nhau sẽ in ra `Done` nếu sai sẽ in ra `Try again`
 
-Ở trên vì user của chương trình đang sài là `ixz` nên chuỗi được đưa vào hàm `compare` sẽ là `Wait, your name isixz`, tuy nhiên ta chỉ cần debug tới trước hàm `strcp` là sẽ biết được chuỗi `v6`
+Ở trên vì user của chương trình đang sài là `ixz` nên chuỗi được đưa vào hàm `compare` sẽ là `Wait, your name isixz`
 
-Sử dụng gdb để debug 
+code hàm `compare`
+```c
+__int64 __fastcall compare(__int64 a1)
+{
+  int i; // [rsp+18h] [rbp-28h]
+  time_t timer; // [rsp+28h] [rbp-18h] BYREF
+  struct tm *v4; // [rsp+30h] [rbp-10h]
+  unsigned __int64 v5; // [rsp+38h] [rbp-8h]
 
+  v5 = __readfsqword(0x28u);
+  time(&timer);
+  v4 = localtime(&timer);
+  for ( i = 0; i < (int)stlen(a1); ++i )
+    *(_BYTE *)(i + a1) ^= v4->tm_min >> v4->tm_mday;
+  return a1;
+}
+```
 
+Phân tích hàm này ta thấy chương trình sẽ lấy từng ký tự của chuỗi truyền vào (`Wait, your name isixz`) rồi thực hiện `xor` với (min>>day) (với >> là dịch phải bit, min là giá trị của phút hiện tại, day là giá trị của ngày hiện tại trong tháng) sau đó trả về kết quả
+ 
+ Vậy kết quả sẽ phụ thuộc vào thời gian hiện tại
+ 
+ Python script
+ ```
+ import time
 
+current_time = time.localtime(time.time())
+
+str = "Wait, your name isixz"
+str_list = list(str)
+
+for i in range(len(str)):
+    str_list[i] = chr(ord(str_list[i]) ^ (current_time.tm_min >> current_time.tm_mday))
+
+print("".join(str_list))
+ ```
+ Đoạn code python trên sẽ in ra chuỗi mà chương trình cần
+ 
 # Chạy chương trình
-Nhập và chuỗi vừa tìm được 
+Với output của đoạn script python
+
+```bash
+└─$ python solve.py | ./a.out
+Enter your flag.
+Done.
+```
+Xong !
 
