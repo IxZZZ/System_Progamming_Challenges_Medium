@@ -701,3 +701,11 @@ LABEL_36:
 }
 ```
 
+Đây là đoạn code mà ta muốn chương trình in ra:
+![image](https://user-images.githubusercontent.com/31529599/120786571-9014ac80-c558-11eb-81a4-a0782900730f.png)
+
+Vậy để in ra chuỗi này thì ta phải nhảy tới `LABEL_63` để set `v41=0` sau đó thực hiện câu `if` trong `win_label` và in ra chuỗi
+
+Đoạn code gọi `LABEL_63`:
+![image](https://user-images.githubusercontent.com/31529599/120787048-25b03c00-c559-11eb-82e8-33c2b1ac70c5.png)
+
