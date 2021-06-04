@@ -1,4 +1,4 @@
-# ** Find password **
+# **Find password**
 
 # Task
 File: password.exe
@@ -89,4 +89,38 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 }
 ```
 
-Ta đặt breakpoint ngay nơi mà cương trình yêu cầu nhập vào và phân tích
+Đoạn này là chính là đoạn code mà chúng ta muốn chương trình in ra, để chương trình in ra thì chương trình phải thoát khỏi hai vòng `while`
+![image](https://user-images.githubusercontent.com/31529599/120765711-aebc7880-c543-11eb-8391-18dc03b9733f.png)
+
+
+Tuy nhiên trước khi nhảy vào 2 vòng `while`chương trình đã yêu cầu nhập vào input và in ra :
+![image](https://user-images.githubusercontent.com/31529599/120766337-55a11480-c544-11eb-93ab-fd8f2f3a040d.png)
+
+Vậy để nhảy vào vòng `while` ta phải nhập vào một chuỗi bất kỳ đầu tiên sau đó chương trình sẽ bắt đầu kiểm tra điều kiện từ chuổi thứ 2 nhập vào 
+
+
+Ta đặt breakpoint ngay nơi mà cương trình yêu cầu nhập vào trong `while` và tiến hành debug
+![image](https://user-images.githubusercontent.com/31529599/120766087-1377d300-c544-11eb-9da2-2d6d0880da97.png)
+
+chuỗi thứ 2 nhập vào khi debug là `bbbbb` có size là `5`
+![image](https://user-images.githubusercontent.com/31529599/120766960-eed02b00-c544-11eb-81e0-8cd0ac4e3e5d.png)
+
+Ở instruction tiếp theo, chương trình sẽ so sánh size của chuỗi nhập vào với `6` nếu khác `6` nhập lại, nếu bằng `6` sẽ kiểm tra điều kiện ở vòng while tiếp theo 
+![image](https://user-images.githubusercontent.com/31529599/120767088-0f988080-c545-11eb-9db1-ca6f828a6c7c.png)
+
+Nhập vào `bbbbbb` size bằng `6` và debug tiếp
+
+Ở điều kiện tiếp theo chương trình sẽ gọi hàm `memcmp` để so sánh hai chuỗi `buf2` và chuỗi nhập vào `buf1`, khi debug ta thấy giá trị của `buf2` = `djejie` ( như hình ở dưới)
+
+![image](https://user-images.githubusercontent.com/31529599/120767849-ce54a080-c545-11eb-8d27-1cb387af7d7e.png)
+
+
+## Chạy chương trình
+Nhập vào chuỗi thứ 2 là chuỗi vừa tìm được `djejie`
+
+![image](https://user-images.githubusercontent.com/31529599/120768024-f47a4080-c545-11eb-89e3-32512c54f560.png)
+
+Xong !
+
+
+
