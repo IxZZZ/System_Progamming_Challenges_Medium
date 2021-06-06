@@ -752,12 +752,14 @@ cụ thể khi debug thì mình thấy vòng `do while` trong sẽ so sánh giá
 Mình đã tiến hành debug với username `abc` và thấy rằng:
 
 Với ký tự `a` thì `v61` sẽ được công vào `size[0] = 0x3`
+
 ![Untitled](https://user-images.githubusercontent.com/31529599/120930713-a23d4900-c718-11eb-907d-de4541c618d0.png)
 
 với ký tự `b` thì `v61` sẽ được cộng vào `size[0] = 5`
 ![Untitled](https://user-images.githubusercontent.com/31529599/120930781-f2b4a680-c718-11eb-8c2f-e1d7675b2733.png)
 
 với ký tự `c` thì `v61` sẽ được cộng vào `size[0] = 5`
+
 ![image](https://user-images.githubusercontent.com/31529599/120930824-268fcc00-c719-11eb-8fc3-c9c4d69d1609.png)
 
 ở đây mình thấy rằng tổng `3+5+5` bằng `13` và `13-1 = 12` thì chia hết cho 4 nên mình đã biết chuỗi `serial` nhập vào sẽ là `abc`. Tuy nhiên như đã nói ở trên thì chương trình vẫn tiếp tục duyệt các ký tự trong bộ nhớ cho đến khi đủ `36` ký tự, cho nên để tránh `61` bị thay đổi chúng ta nên làm sai câu (`if ( v8 == alphaet_upper[v10] )`) nhập một ký tự khác chuỗi ở trên ở đây mình chọn `-`
@@ -766,6 +768,7 @@ nên chuỗi `username` sẽ là `abc-----------------------------------` độ 
 
 
 Đây là số vòng lặp của 2 vòng `do while` lồng nhau
+
 ![image](https://user-images.githubusercontent.com/31529599/120930239-a49ea380-c716-11eb-93ac-9a3f8ca942b4.png)
 
 
@@ -779,6 +782,7 @@ Như đã phân tích ban đầu, thì ta chương trình sẽ không trực ti�
 với `v34` là một chuỗi có sẵn trong chương trình `.- -... -.-.`
 
 ![image](https://user-images.githubusercontent.com/31529599/120931202-cbf76f80-c71a-11eb-868a-b7bac0dc847e.png)
+
 ![image](https://user-images.githubusercontent.com/31529599/120931249-eaf60180-c71a-11eb-906d-d48cc8e0f5d1.png)
 
 và `v32` là chuỗi `serial` nhập vào
