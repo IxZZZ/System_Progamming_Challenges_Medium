@@ -9,6 +9,6 @@
 | 45m | [racecars](./racecars_solve/WriteUp.md) | rev |
 | 45m | [Keygen Me Part 1](./Keygen%20Me%20Part%201_solve/WriteUp.md) | rev |
 | 1h | [CrackMe2 - Classical cipher](./CrackMe2%20-%20Classical%20cipher_solve/WriteUp.md) | rev |
-| 1h | [WarGames](./racecars_solve/WriteUp.md) | rev |
+| 1h | [WarGames](./WarGames_solve/WriteUp.md) | rev |
 | 2h | [no strings attached](./no%20strings%20attached_solve/WriteUp.md) | rev |
 | 5h | [FindMySecret](./FindMySecret_thread/WriteUp.md) | rev |
