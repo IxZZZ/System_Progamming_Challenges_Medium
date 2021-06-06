@@ -702,11 +702,99 @@ LABEL_36:
 ```
 
 Đây là đoạn code mà ta muốn chương trình in ra:
+
 ![image](https://user-images.githubusercontent.com/31529599/120786571-9014ac80-c558-11eb-81a4-a0782900730f.png)
 
 Vậy để in ra chuỗi này thì ta phải nhảy tới `LABEL_63` để set `v41=0` sau đó thực hiện câu `if` trong `win_label` và in ra chuỗi
 
 Đoạn code gọi `LABEL_63`:
-![image](https://user-images.githubusercontent.com/31529599/120787048-25b03c00-c559-11eb-82e8-33c2b1ac70c5.png)
+
+![image](https://user-images.githubusercontent.com/31529599/120929568-bc285d00-c713-11eb-95ff-b00f3f66959d.png)
+
+Ta thấy để gọi được `LABEL_63` thì `v36 = Size[0] - 4 ` phải bằng `-4`, nghĩa là `Size[0]` phải bằng `0` tuy nhiên mình đã debug và thử thì `Size[0]` sẽ là một giá trị dương và phụ thuộc vào `username` nhập vào cho nên bài này chúng ta sẽ dựa vào đoạn `else` để chuyển giá trị `v36` về 0 vì trong đoạn `else` chương trình sẽ kiểm tra điều kiện vòng while và sẽ trừ `v36` mỗi lần `4` cho đến khi điều kiện sai vậy thì ta chỉ cần `size[0]` là một số chia hết cho `4` và số đó sẽ được trừ cho đến khi bằng `0<4` (sau đó được trừ cho `4` thành `-4`) thì sẽ thỏa câu `if` trong `while` và nhảy về `LABEL_54` và thỏa câu `if ( v36 == -4 )` và nhảy tới `LABEL_63` mà ta muốn
+
+Trước tiên, để nhảy tới được khúc này, thì chương trình phải sai câu `if ( Size[0] != v58 )` ở trên đoạn này:
+
+![image](https://user-images.githubusercontent.com/31529599/120929903-1a097480-c715-11eb-8fd5-e34c082ec882.png)
+
+nghĩa là `Size[0] == v58` theo mình debug thì mình thấy `v58` chính là giá trị độ dài chuỗi Serial nhập vào.
+
+Còn `size[0]` , thì sau khi nhập vào `serial` thì chương trình set `size[0]=0`, tuy nhiên sau đó chương trình gọi hàm `sub_891E90`, sau hàm này thì `size[0]` bị thay đổi và cụ thể là bị thay đổi đúng bằng giá trị của biến `v29`(trong quá trình debug sẽ thấy), như đoạn code ở trên thì `v29= v61[0] - 1`
+
+![image](https://user-images.githubusercontent.com/31529599/120929958-62289700-c715-11eb-8814-175a324446ad.png)
 
 
+Vậy đến đây thì ta biết được, `size[0]` = `v29` = `v61[0]-1` => `v61[0] -1` phải là một số chia hết cho `4`
+
+Vì ở đây `v61[0]` sẽ được tính phụ thuôc vào chuỗi `username` nhập vào cho nên đây là lí do mình đề cập ở trên `size[0]` nằm sau khi nhập `serial` lại phụ thuộc vào `username` nhập vào
+
+Tiếp tục phân tích ngược lên trên để xem sự thanh đổi của `v61`
+
+Sau đây là một số đoạn code mà ta cần quan tâm:
+
+ở đoạn đầu này, ta thấy sau khi nhập `serial` thì chương trình sẽ thực hiện một vòng `while` để chuyển toàn bộ các ký tự của chuỗi `serial` nhập vào thành ký tự in hoa.
+
+Sau đó chương trình lần lượt nhảy vào hai vòng `do while`, 
+
+- vòng `do while` ngoài sẽ là duyệt `36` ký tự liên tiếp từ vị trí ký tự đầu tiên của chuỗi `serial` nhập vào (nếu số ký tự nhập vào `<36` chương trình vẫn tiếp tục duyệt tiếp trong vùng nhớ lấy các ký tự có trong đó
+- vòng `do while` ở trong sẽ thực hiện thay đổi giá trị của `v61[0]` (ban đầu là `0`), tuy nhiên giá trị chỉ bị thay đổi bên trong câu `if` cho nên chúng ta phải pass được câu `if` này ( `if ( v8 == alphaet_upper[v10] )`).
+
+![image](https://user-images.githubusercontent.com/31529599/120930232-9a7ca500-c716-11eb-880b-1eb4c222a375.png)
+
+cụ thể khi debug thì mình thấy vòng `do while` trong sẽ so sánh giá trị của từng ký tự duyệt của vòng `do while` ngoài (`v8`) và so sánh với lần lượt `'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'` ( 36 ký tự này) nếu ký tự `v8` là một trong các ký tự của chuỗi `alphaet_upper` thì trong `if` sẽ thay đổi giá trị của `v61[0]`
+
+![Untitled](https://user-images.githubusercontent.com/31529599/120930555-fd227080-c717-11eb-9ba2-44add9f5fb09.png)
+
+Đây là đoạn code thay đổi giá trị của `v61[0]`, đoạn trong `if` khá là dài tuy nhiên mình không phân tích những phần không cần thiết.
+
+![image](https://user-images.githubusercontent.com/31529599/120930209-8d5fb600-c716-11eb-8be9-d9afcc9fa65b.png)
+
+Mình đã tiến hành debug với username `abc` và thấy rằng:
+
+Với ký tự `a` thì `v61` sẽ được công vào `size[0] = 0x3`
+![Untitled](https://user-images.githubusercontent.com/31529599/120930713-a23d4900-c718-11eb-907d-de4541c618d0.png)
+
+với ký tự `b` thì `v61` sẽ được cộng vào `size[0] = 5`
+![Untitled](https://user-images.githubusercontent.com/31529599/120930781-f2b4a680-c718-11eb-8c2f-e1d7675b2733.png)
+
+với ký tự `c` thì `v61` sẽ được cộng vào `size[0] = 5`
+![image](https://user-images.githubusercontent.com/31529599/120930824-268fcc00-c719-11eb-8fc3-c9c4d69d1609.png)
+
+ở đây mình thấy rằng tổng `3+5+5` bằng `13` và `13-1 = 12` thì chia hết cho 4 nên mình đã biết chuỗi `serial` nhập vào sẽ là `abc`. Tuy nhiên như đã nói ở trên thì chương trình vẫn tiếp tục duyệt các ký tự trong bộ nhớ cho đến khi đủ `36` ký tự, cho nên để tránh `61` bị thay đổi chúng ta nên làm sai câu (`if ( v8 == alphaet_upper[v10] )`) nhập một ký tự khác chuỗi ở trên ở đây mình chọn `-`
+
+nên chuỗi `username` sẽ là `abc-----------------------------------` độ dài là 36 ký tự
+
+
+Đây là số vòng lặp của 2 vòng `do while` lồng nhau
+![image](https://user-images.githubusercontent.com/31529599/120930239-a49ea380-c716-11eb-93ac-9a3f8ca942b4.png)
+
+
+Vậy ta đã xong được việc đưa `size[0]` ở sau khi nhập vào `serial` thành `0xc = 12` chia hết cho 4, và pass được câu `if`, với `v58` là độ dài của `serial` ta chỉ cần nhập vào một chuỗi `12` ký tự
+
+![image](https://user-images.githubusercontent.com/31529599/120931096-525f8180-c71a-11eb-9891-11dc2f948b0e.png)
+
+
+Như đã phân tích ban đầu, thì ta chương trình sẽ không trực tiếp pass câu `if` và nhảy đến `LABEL_63` mà chúng ta phải thông qua đoạn code trong `else` để trừ `v36` để thỏa điều kiện và nhảy tới `LABEL_63`. Tuy nhiên, để `v36` được trừ đi `4` thì điều kiện vòng `while` phải thỏa.
+
+với `v34` là một chuỗi có sẵn trong chương trình `.- -... -.-.`
+
+![image](https://user-images.githubusercontent.com/31529599/120931202-cbf76f80-c71a-11eb-868a-b7bac0dc847e.png)
+![image](https://user-images.githubusercontent.com/31529599/120931249-eaf60180-c71a-11eb-906d-d48cc8e0f5d1.png)
+
+và `v32` là chuỗi `serial` nhập vào
+
+![image](https://user-images.githubusercontent.com/31529599/120931232-da458b80-c71a-11eb-8b2c-7c50872c6395.png)
+
+vòng `while` thực hiện so sánh từng ký tự và trừ `v36` đi `4` cho đến khi `v36<4`
+
+và chuỗi `serial` = `.- -... -.-.` cũng có độ dài bằng `12` đúng bằng điều kiện if ở trên:
+
+![image](https://user-images.githubusercontent.com/31529599/120931338-49bb7b00-c71b-11eb-8feb-d99dad351e31.png)
+
+## Chạy thử chương trình
+với `username` = `abc-----------------------------------`
+`serial` = `.- -... -.-.`
+
+![image](https://user-images.githubusercontent.com/31529599/120931409-8c7d5300-c71b-11eb-822f-7ae6faa6d6c0.png)
+
+Xong !
