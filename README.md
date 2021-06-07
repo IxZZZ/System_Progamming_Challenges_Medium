@@ -6,7 +6,7 @@
 | 15m | [Find password](./Find%20password_solve/WriteUp.md) | rev |
 | 20m | [Just CrackmeS](./Just%20crackmeS_solve/WriteUp.md) | rev |
 | 30m | [ZED - Crackme_packed](./ZED-Crackme_packed_solve/WriteUp.md) | rev |
-| 45m | [racecars](./racecars_solve/WriteUp.md) | rev |
+| 30m | [racecars](./racecars_solve/WriteUp.md) | rev |
 | 45m | [WarGames](./WarGames_solve/WriteUp.md) | rev |
 | 1h | [CrackMe2 - Classical cipher](./CrackMe2%20-%20Classical%20cipher_solve/WriteUp.md) | rev |
 | 1h | [no strings attached](./no%20strings%20attached_solve/WriteUp.md) | rev |
