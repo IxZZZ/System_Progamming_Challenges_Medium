@@ -332,12 +332,17 @@ for t in range(50):
 
 ## Chạy chương trình nhập vào số tương ứng với số timestamp chia lấy dư cho `50`
 
+![image](https://user-images.githubusercontent.com/31529599/120989913-3dcaca00-c7aa-11eb-8994-4d73490f381a.png)
+
 Ở đây mình chạy chương trình lúc timestamp là `1623056716` chia lấy dư cho `50` sẽ là `16`
 
 Tra với số ở trên và nhập vào chương trình sẽ là `6202`
 
-![image](https://user-images.githubusercontent.com/31529599/120989913-3dcaca00-c7aa-11eb-8994-4d73490f381a.png)
-
+```bash
+└─$ ./FindMySecret.exe
+Enter the secret number6202
+Success! You have completely reverse engineered and found the secret number!
+```
 Xong !
 
 
