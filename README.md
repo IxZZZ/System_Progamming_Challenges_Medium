@@ -3,7 +3,7 @@
 | time | Challenges | exploit |
 | ------ | --------------------------- | ------------------------------- |
 | 10m | [EscapeTheDunge0n - Exploit](EscapeTheDunge0n%20-%20Expl0it_solve/WriteUp.md) | rev |
-| 20m | [Find password](./Find%20password_solve/WriteUp.md) | rev |
+| 15m | [Find password](./Find%20password_solve/WriteUp.md) | rev |
 | 20m | [Just CrackmeS](./Just%20crackmeS_solve/WriteUp.md) | rev |
 | 30m | [ZED - Crackme_packed](./ZED-Crackme_packed_solve/WriteUp.md) | rev |
 | 45m | [racecars](./racecars_solve/WriteUp.md) | rev |
