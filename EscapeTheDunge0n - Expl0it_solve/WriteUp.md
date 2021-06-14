@@ -303,7 +303,7 @@ Phân tích ngược lên trên, ta thấy chương trình lần lượt nhận 
 ## Solve
 Vậy input nhập vào sẽ là 
 1 -> trong main
-2 1 2 78896 -> trong Must_call_to_win()
+2 1 2 788960 -> trong Must_call_to_win()
 
 
 # Chạy và kiểm tra với input vừa tìm được 
