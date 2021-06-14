@@ -111,9 +111,11 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 Phân tích sơ lược thì file chương trình sẽ nhập vào một chuỗi và so sánh chuỗi nhập vào với chuỗi được lưu ở `s1` với `s1` được tính từ các byte của chuỗi `v6` (`AHi23DEADBEEFCOFFEE`)
 
 Đây là đoạn code để tính ra `s1`
+
 ![image](https://user-images.githubusercontent.com/31529599/120781818-a10eef00-c553-11eb-9b9f-c278d3bc5d74.png)
 
 Nếu bình thường thì ta có thể debug và xem giá trị của `s1` được tạo ra sau khi tính, tuy nhiên thì chương trình đã đặt một đoạn code detect debug và thoát chương trình nên ta không thể debug được 
+
 ![image](https://user-images.githubusercontent.com/31529599/120782023-cc91d980-c553-11eb-9aa8-7d3f8c605251.png)
 
 
