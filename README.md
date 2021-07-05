@@ -1,5 +1,4 @@
 # System_Progamming_Challenges_Medium
-# System_Programming_Challenges
 | time | Challenges | exploit |
 | ------ | --------------------------- | ------------------------------- |
 | 10m | [EscapeTheDunge0n - Exploit](EscapeTheDunge0n%20-%20Expl0it_solve/WriteUp.md) | rev |
